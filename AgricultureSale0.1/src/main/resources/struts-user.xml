@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="user" namespace="/user" extends="struts-default">
+	   <action name="AjaxValidateUsername" class="UserAction"
+			method="ajaxValidateUsername">
+		</action>
+		 <action name="AjaxValidateEmail" class="UserAction"
+			method="ajaxValidateEmail">
+		</action>
+		 <action name="Regist" class="UserAction"
+			method="regist">
+			<result name="success">/zw/msg.jsp</result>
+			<result name="error">/zw/user/regist.jsp</result>
+		</action>
+		 <action name="Login" class="UserAction"
+			method="login">
+			<result name="success">/zw/c1.jsp</result>
+			<result name="error">/zw/user/regist.jsp</result>
+		</action>
+		 <action name="active" class="UserAction"
+			method="active">
+			<result name="success">/zw/msg.jsp</result>
+			<result name="error">/zw/msg.jsp</result>
+		</action>
+	</package>
+  
+   <package name="verify" namespace="/verify" extends="struts-default">
+
+	   <action name="VerifyCode" class="VerifyCodeAction"
+			method="VerifyCode">
+		</action>
+		<action name="AjaxValidateVerifyCode" class="VerifyCodeAction"
+			method="ajaxValidateVerifyCode">
+		</action>
+	</package>
+    
+  
+</struts> 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.agriculture.vo">
+	<class name="Category" table="category">
+	    <id name="id" column="id">
+	        <generator class="native"></generator>
+	    </id>
+		<property name="name" column="name">
+		</property>
+		
+		<many-to-one name="parent" class="Category" column="pid"></many-to-one>
+		
+		<!-- 可以是用set list map 多种 -->
+		<set name="childs" cascade="all">
+		    <!-- 我不是很清楚，但应该是利用这个key和这个表主键进行查询 -->
+			<key column="pid"></key>
+			<one-to-many class="Category"/>
+		</set>
+		
+	</class>
+</hibernate-mapping> 

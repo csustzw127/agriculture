@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="category" namespace="/category" extends="struts-default">
+	   <action name="allCategory" class="CategoryAction"
+			method="findAll">
+			<result name="success">/zw/nav.jsp</result>
+		</action>
+		<action name="findParentCate" class="CategoryAction"
+		       method="findParentCate">
+		</action>
+		<action name="findChildCate" class="CategoryAction"
+			method="findChildCate">
+		</action>
+		 <action name="all" class="CategoryAction"
+			method="allCategory">
+			<result name="success">/zw/ajaxnav.jsp</result>
+		</action>
+	</package>
+  
+</struts> 

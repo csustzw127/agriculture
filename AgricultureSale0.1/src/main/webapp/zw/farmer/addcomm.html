@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>农户中心</title>
+
+		<link href="/AgricultureSale0.1/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="/AgricultureSale0.1/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+
+		<link href="/AgricultureSale0.1/css/personal.css" rel="stylesheet" type="text/css">
+		<script src="/AgricultureSale0.1/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="/AgricultureSale0.1/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+        <style type="text/css">
+        	 .top {
+            background-color: white;
+            width: 1200px;
+		    font:14px "Arial Black", arial, serif;
+            line-height: 30px;
+            margin: 0px auto;
+        }
+		.top_l{
+			margin-left:20px;
+		}
+        </style>
+		
+		<script type="text/javascript">
+		function mychange() {
+			var file = document.all.image.files[0];
+			var reader = new FileReader();
+		    var img = document.getElementById("img");
+			reader.addEventListener("load", function() {
+				img.src = reader.result;
+			}, false);
+		
+			if (file) {
+				reader.readAsDataURL(file);
+			}
+	     }
+	     $(function(){
+	       /*
+	        *1、发送ajax请求,获取第一级分类
+	        */
+	        $.ajax({
+	        url:"/AgricultureSale0.1/category/findParentCate.action",
+	        type:"post",
+	        dataType:"json",
+	        async:false,
+	        cache:false,
+	        success:function(result){
+	        	addSelectCate(result,1);
+	        }
+	        });
+	     });
+	     
+	     function addSelectCate(result,level) {
+	        var select = $("#select"+level)[0];
+	        var appendHTML="<option value='-1'>--------------请选择-------------</option>";
+		    
+			for(var i=0;i<result.length;i++) {
+			   appendHTML += "<option value='"+result[i]["id"]+"'>"+result[i]["name"]+"</option>";
+			}
+			select.innerHTML = appendHTML;		    
+	     }
+	     
+	     function getChildCate(ele,level) {
+	        /*
+	         * 获取该类别的子类别 ele是发生该选择事件的下拉框
+	         */
+	         var cateid = ele.value;
+	         // 发送ajax请求
+	         $.ajax({
+		        url:"/AgricultureSale0.1/category/findChildCate.action",
+		        data:{id:cateid},
+		        type:"post",
+		        dataType:"json",
+		        async:false,
+		        cache:false,
+		        success:function(result){
+		        	addSelectCate(result,level);
+		        }
+		      });
+	     }
+		</script>
+	</head>
+
+	<body>
+		<!--头 -->
+	 <div class="top" >
+      <span class="top_l">
+          &nbsp; 您好 : farmerzzw
+	  </span>
+    </div>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-address">
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">产品上传</strong> / <small>Add&nbsp;commodity</small></div>
+						</div>
+						<hr/>
+						
+						<div class="clear"></div>
+					<form class="am-form" method="post" enctype="multipart/form-data" action="/AgricultureSale0.1/commodity/addCommodity.action">
+					  <fieldset>
+					    <div class="am-form-group">
+					      <label for="doc-ipt-email-1">产品名</label>
+					      <input type="text" name="name" placeholder="输入产品名">
+					    </div>
+					
+					    <div class="am-form-group">
+					      <label for="doc-ipt-pwd-1">产品信息</label>
+					      <input type="text" name="info" placeholder="输入产品信息">
+					    </div>
+						
+						 <div class="am-form-group">
+					      <label for="doc-ipt-pwd-1">产品价格</label>
+					      <input type="text" name="price" placeholder="输入产品价格">
+					    </div>
+						
+						<div class="am-form-group">
+					      <label for="doc-ipt-pwd-1">产品规格</label>
+					      <input type="text" name="specs" placeholder="输入产品规格">
+					    </div>
+					
+					    <div class="am-form-group am-form-file">
+					      <div>
+					        <button type="button" class="am-btn am-btn-default am-btn-sm">
+					          <i class="am-icon-cloud-upload"></i> 选择要上传的产品图片</button>
+					      </div>
+					      <input type="file" name="image" id="doc-ipt-file-2"  onchange="mychange()"/>
+						  <img id="img" style="width:200px;height:200px;"/>
+					    </div>
+					    <div class="am-form-group" >
+					      <label for="doc-select-1">一级分类</label>
+					      <select  id="select1" onchange="getChildCate(this,2)">
+					      </select>
+					      <span class="am-form-caret"></span>
+					    </div>
+					    <div class="am-form-group" >
+					      <label for="doc-select-1">二级分类</label>
+					      <select  id="select2" onchange="getChildCate(this,3)">
+					      </select>
+					      <span class="am-form-caret"></span>
+					    </div>
+					    <div class="am-form-group" >
+					      <label for="doc-select-1">三级分类</label>
+					      <select  name="cate_id" id="select3" >
+					      </select>
+					      <span class="am-form-caret"></span>
+					    </div>
+					
+					    <p><button type="submit"  class="am-btn am-btn-primary">提交</button></p>
+					  </fieldset>
+					</form>
+				    </div>
+				</div>
+			</div>
+
+			<aside class="menu">
+				<ul>
+					<li class="person active">
+						<a href="index.html"><i class="am-icon-user"></i>农户中心</a>
+					</li>
+					<li class="person">
+						<p><i class="am-icon-newspaper-o"></i>个人资料</p>
+						<ul>
+							<li> <a href="information.html">个人信息</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<p><i class="am-icon-balance-scale"></i>我的交易</p>
+						<ul>
+							<li><a href="order.html">订单管理</a></li>
+							<li> <a href="change.html">退款售后</a></li>
+							<li> <a href="comment.html">商品评价</a></li>
+						</ul>
+					</li>
+				    <li class="person">
+						<p><i class="am-icon-balance-scale"></i>产品管理</p>
+						<ul>
+						    <li><a href="/AgricultureSale0.1/zw/farmer/mycommodity.html">我的产品</a></li>
+							<li><a href="/AgricultureSale0.1/zw/farmer/addcomm.html">上传产品</a></li>
+							<li> <a href="change.html">下架产品</a></li>
+							<li> <a href="change.html">删除产品</a></li>
+						</ul>
+					</li>
+				</ul>
+
+			</aside>
+		</div>
+
+	</body>
+
+</html>

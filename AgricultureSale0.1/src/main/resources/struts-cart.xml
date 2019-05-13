@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+   <package name="cart" namespace="/cart" extends="struts-default">
+      <action name="addToCart" class="CartAction" method="addToCart">
+         <result name="success" type="chain">findByUser</result>
+      </action>
+      <action name="findByUser" class="CartAction" method="findByUser">
+         <result name="success">/zw/user/cart.jsp</result>
+      </action>
+       <action name="delete" class="CartAction" method="delete">
+         <result name="success">/zw/user/cart.jsp</result>
+      </action>
+   </package>
+  
+</struts> 

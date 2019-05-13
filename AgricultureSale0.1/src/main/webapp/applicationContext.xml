@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- <property name="configLocation" value="classpath:hibernate.cfg.xml"></property> -->
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect"> org.hibernate.dialect.MySQLDialect </prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate3.SpringSessionContext
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/agriculture/vo/Category.hbm.xml</value>
+				<value>com/agriculture/vo/User.hbm.xml</value>
+				<value>com/agriculture/vo/Farmer.hbm.xml</value>
+				<value>com/agriculture/vo/Commodity.hbm.xml</value>
+				<value>com/agriculture/vo/Cart.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/agriculture"></property>
+		<property name="user" value="root" />
+		<property name="password" value="woshizw" />
+
+		<property name="minPoolSize" value="10" />
+		<property name="maxPoolSize" value="100" />
+		<property name="maxIdleTime" value="1800" />
+		<property name="acquireIncrement" value="3" />
+		<property name="maxStatements" value="100" />
+		<property name="initialPoolSize" value="10" />
+		<property name="breakAfterAcquireFailure" value="true" />
+		<property name="testConnectionOnCheckout" value="false" />
+	</bean>
+
+	<!-- category 类别的spring配置 -->
+
+	<bean id="CategoryAction" class="com.agriculture.action.CategoryAction">
+		<property name="categoryService">
+			<ref bean="CategoryService" />
+		</property>
+	</bean>
+
+	<bean id="CategoryService" class="com.agriculture.service.impl.CategoryServiceImpl">
+		<property name="categoryDao">
+			<ref bean="CategoryDao"></ref>
+		</property>
+	</bean>
+
+	<bean id="CategoryDao" class="com.agriculture.dao.impl.CategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- User 的spring配置 -->
+
+	<bean id="UserAction" class="com.agriculture.action.UserAction">
+		<property name="userService">
+			<ref bean="UserService" />
+		</property>
+	</bean>
+	<bean id="UserService" class="com.agriculture.service.impl.UserServiceImpl">
+		<property name="UserDao">
+			<ref bean="UserDao"></ref>
+		</property>
+	</bean>
+	<bean id="UserDao" class="com.agriculture.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Farmer 的spring配置 -->
+
+	<bean id="FarmerAction" class="com.agriculture.action.FarmerAction">
+		<property name="farmerService">
+			<ref bean="FarmerService" />
+		</property>
+	</bean>
+	<bean id="FarmerService" class="com.agriculture.service.impl.FarmerServiceImpl">
+		<property name="farmerDao">
+			<ref bean="FarmerDao"></ref>
+		</property>
+	</bean>
+	<bean id="FarmerDao" class="com.agriculture.dao.impl.FarmerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Commodity 的spring配置 -->
+
+	<bean id="CommodityAction" class="com.agriculture.action.CommodityAction">
+		<property name="commodityService">
+			<ref bean="CommodityService" />
+		</property>
+	</bean>
+	<bean id="CommodityService" class="com.agriculture.service.impl.CommodityServiceImpl">
+		<property name="commodityDao">
+			<ref bean="CommodityDao"></ref>
+		</property>
+	</bean>
+	<bean id="CommodityDao" class="com.agriculture.dao.impl.CommodityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Cart 的spring配置 -->
+
+	<bean id="CartAction" class="com.agriculture.action.CartAction">
+		<property name="cartService">
+			<ref bean="CartService" />
+		</property>
+	</bean>
+	<bean id="CartService" class="com.agriculture.service.impl.CartServiceImpl">
+		<property name="cartDao">
+			<ref bean="CartDao"></ref>
+		</property>
+	</bean>
+	<bean id="CartDao" class="com.agriculture.dao.impl.CartDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- VerifyCode 验证码的spring配置 -->
+	<bean id="VerifyCodeAction" class="com.agriculture.action.VerifyCodeAction">
+
+	</bean>
+
+</beans>

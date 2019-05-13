@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.agriculture.vo">
+	<class name="Farmer" table="farmer">
+	    <id name="id" column="id">
+	        <generator class="native"></generator>
+	    </id>
+		<property name="username" column="username">
+		</property>
+		<property name="nickname" column="nickname">
+		</property>
+		<property name="psw" column="psw">
+		</property>
+        <property name="email" column="email">
+		</property>		
+		<property name="status" column="status">
+		</property>
+	</class>
+</hibernate-mapping> 

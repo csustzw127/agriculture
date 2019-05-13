@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>jquery轮播效果图 </title>
+    <link href="../AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
+    <link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
+	<link href="../basic/css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/hmstyle.css" rel="stylesheet" type="text/css"/>
+	
+    <link href="css/lunbo.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js">
+    </script>
+    <script type="text/javascript" src="js/jquery.js">
+    </script>
+    <script type="text/javascript" src="js/lunbo.js">
+    </script>
+    <style type="text/css">
+        .leftnav {
+            width: 300px;
+            height: 455px;
+            background: black;
+            float: left;
+        }
+        
+        .top {
+            background-color: #f5f5f5;
+            width: 1300px;
+            font-size: 12pt;
+            line-height: 30px;
+            text-align: right;
+            margin: 0px auto;
+        }
+        
+        .panel_ad {
+            width: 100%;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="top">
+            <a href="main.jsp" target="_parent">首页</a>
+            |&nbsp; <a href="login.jsp" target="_parent">会员登录</a>
+            |&nbsp; <a href="regist.jsp" target="_parent">注册会员</a>
+            会员：&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<c:url value='/cart/findByUser.action?currPage=1'/>" target="_parent">我的购物车</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<c:url value='/order/findByUser.action?currPage=1'/>" target="_parent">我的订单</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javaScript:void(0);" target="body">修改密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<c:url value='/UserServlet?method=quit'/>" target="_parent">退出</a>
+        </div>
+        <!-- 搜索框-->
+        <div class="nav white">
+            <div class="search-bar pr">
+                <a name="index_none_header_sysc" href="#"></a>
+                <form>
+                    <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off"><input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                </form>
+            </div>
+        </div><!-- 导航栏 -->
+      
+        <div class="panel_ad">
+            <div class="slider">
+                <ul class="slider-main">
+                    <li class="slider-panel">
+                        <a href="#" target="_blank"><img src="image/ad1.png"></a>
+                    </li>
+                    <li class="slider-panel">
+                        <a href="#" target="_blank"><img src="image/ad2.png"></a>
+                    </li>
+                </ul>
+                <div class="slider-extra">
+                    <ul class="slider-nav">
+                        <li class="slider-item">
+                        </li>
+                        <li class="slider-item">
+                        </li>
+                    </ul>
+                    <div class="slider-page">
+                        <a class="slider-pre" href="javascript:;;"> < </a>
+                        <a class="slider-next" href="javascript:;;">></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="farmer" namespace="/farmer" extends="struts-default">
+	   <action name="regist" class="FarmerAction" method="regist">
+	      <result name="success">/zw/msg2.jsp</result>
+	   </action>
+	   <action name="Login" class="FarmerAction" method="login">
+	      <result name="success">/zw/farmer/addcomm.html</result>
+	   </action>
+	    <action name="AjaxValidateUsername" class="FarmerAction"
+			method="ajaxValidateUsername">
+		</action>
+	</package>
+  
+</struts> 

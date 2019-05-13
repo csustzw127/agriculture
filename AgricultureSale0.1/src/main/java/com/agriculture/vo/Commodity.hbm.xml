@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.agriculture.vo">
+	<class name="Commodity" table="product">
+	    <id name="id" column="id">
+	        <generator class="native"></generator>
+	    </id>
+		
+		<property name="name" column="name"></property>
+		<property name="info" column="info"></property>
+		<property name="image" column="image"></property>
+		<property name="price" column="price"></property>
+		<property name="specs" column="specs"></property>
+		
+		<many-to-one name="category" class="Category" column="cate_id"></many-to-one>
+		<many-to-one name="farmer" class="Farmer" column="fid"></many-to-one>
+	
+	</class>
+</hibernate-mapping> 
